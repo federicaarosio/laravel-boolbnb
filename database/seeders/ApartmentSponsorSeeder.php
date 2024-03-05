@@ -19,7 +19,7 @@ class ApartmentSponsorSeeder extends Seeder
         $sponsorsIds = Sponsor::all()->pluck('id');
 
         foreach ($apartments as $apartment) {
-            $apartment->sponsor()->sync($faker->randomElements( $sponsorsIds, rand(1,5), false ));
+            $apartment->sponsors()->syncWithPivotValues($faker->randomElements( $sponsorsIds, rand(1,3), false ), ['expiry_date' => $faker->dateTime()]);
         }
 
     }
