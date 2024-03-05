@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('visitors', function (Blueprint $table) {
             $table->id();
-            $table->foreign('apartment_id')->references('id')->on('apartments')->onDelete('cascade');
+            $table->unsignedBigInteger('apartment_id');
             $table->date('datetime');
             $table->string('ip_address');
             $table->timestamps();
+            
+            $table->foreign('apartment_id')->references('id')->on('apartments')->onDelete('cascade');
         });
     }
 

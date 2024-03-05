@@ -12,4 +12,10 @@ class Service extends Model
         'name',
         'image',
     ];
+
+    
+
+    public function apartments() {
+        return $this->belongsToMany(Apartment::class)->withTimestamps();
+    }
 }
