@@ -28,8 +28,8 @@ return new class extends Migration
             $table->decimal('latitude', 8, 6);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 
