@@ -20,6 +20,8 @@ return new class extends Migration
 
             $table->primary(['apartment_id', 'sponsor_id']);
             $table->timestamps();
+
+            $table->dateTime('expiry_date');
         });
     }
 
