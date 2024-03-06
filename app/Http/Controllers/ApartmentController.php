@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Apartment;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +23,9 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+        $apartment = new Apartment();
+        $categories = Category::all();
+        return view('apartments.create', compact('apartment', 'categories'));
     }
 
     /**
@@ -30,7 +33,24 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request;
+        $data['user_id'] = Auth::id();
+        $data['is_visible'] = true;
+
+        $apiKey = env('TOMTOM_API_KEY');
+        $addressQuery = str_replace(' ', '+', $data['address']);
+
+        $coordinate = "https://api.tomtom.com/search/2/geocode/{$addressQuery}.json?key={$apiKey}";
+
+        $json = file_get_contents($coordinate);
+        $obj = json_decode($json);
+        $lat = $obj->results[0]->position->lat;
+        $lon = $obj->results[0]->position->lon;
+
+        $data['latitude'] = $lat;
+        $data['longitude'] = $lon;
+        $apartment = Apartment::create($data->all());
+        return to_route('apartments.create', $apartment);
     }
 
     /**
@@ -60,8 +80,9 @@ class ApartmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Apartment $apartment)
     {
-        //
+        $apartment->delete();
+        return to_route('apartments.index');
     }
 }
