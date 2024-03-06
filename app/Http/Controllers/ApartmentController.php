@@ -35,8 +35,21 @@ class ApartmentController extends Controller
     {
         $data = $request;
         $data['user_id'] = Auth::id();
-        $apartment = Apartment::create($data);
+        $data['is_visible'] = true;
 
+        $apiKey = env('TOMTOM_API_KEY');
+        $addressQuery = str_replace(' ', '+', $data['address']);
+
+        $coordinate = "https://api.tomtom.com/search/2/geocode/{$addressQuery}.json?key={$apiKey}";
+
+        $json = file_get_contents($coordinate);
+        $obj = json_decode($json);
+        $lat = $obj->results[0]->position->lat;
+        $lon = $obj->results[0]->position->lon;
+
+        $data['latitude'] = $lat;
+        $data['longitude'] = $lon;
+        $apartment = Apartment::create($data->all());
         return to_route('apartments.create', $apartment);
     }
 

@@ -8,13 +8,13 @@
     <h1 class="text-center">Add</h1>
     {{-- Errors alert --}}
     @if ($errors->any())
-      <div class="alert alert-danger">
-          <ul>
-              @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-              @endforeach
-          </ul>
-      </div>
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
     @endif
 
     <form action="{{ route('apartments.store')}}" method="POST">
@@ -50,8 +50,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="room_number" class="form-label">Bedrooms</label>
-            <input type="number" class="form-control" name="room_number" id="room_number" value="{{ old('room_number', $apartment->room_number) }}">
+            <label for="bed_number" class="form-label">Bedrooms</label>
+            <input type="number" class="form-control" name="bed_number" id="bed_number" value="{{ old('bed_number', $apartment->bed_number) }}">
         </div>
 
         <div class="mb-3">
@@ -62,6 +62,11 @@
         <div class="mb-3">
             <label for="square_meters" class="form-label">Total square meters</label>
             <input type="number" class="form-control" name="square_meters" id="square_meters" value="{{ old('square_meters', $apartment->square_meters) }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="img_url" class="form-label">Image Url</label>
+            <input type="text" class="form-control" name="img_url" id="img_url" value="{{ old('img_url', $apartment->img_url) }}">
         </div>
 
         <div class="mb-3">
