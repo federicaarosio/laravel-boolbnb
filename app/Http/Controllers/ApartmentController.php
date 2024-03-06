@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Apartment;
 use App\Models\Category;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,7 +26,8 @@ class ApartmentController extends Controller
     {
         $apartment = new Apartment();
         $categories = Category::all();
-        return view('apartments.create', compact('apartment', 'categories'));
+        $services = Service::all();
+        return view('apartments.create', compact('apartment', 'categories', 'services'));
     }
 
     /**
@@ -50,7 +52,8 @@ class ApartmentController extends Controller
         $data['latitude'] = $lat;
         $data['longitude'] = $lon;
         $apartment = Apartment::create($data->all());
-        return to_route('apartments.create', $apartment);
+        $apartment->services()->sync($data['services']);
+        return to_route('apartments.show', $apartment);
     }
 
     /**
@@ -58,7 +61,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        return view('Apartments.show', compact('apartment'));
+        return view('apartments.show', compact('apartment'));
     }
 
     /**
@@ -67,7 +70,8 @@ class ApartmentController extends Controller
     public function edit(Apartment $apartment)
     {
         $categories = Category::all();
-        return view('apartments.edit', compact('apartment', 'categories'));
+        $services = Service::all();
+        return view('apartments.edit', compact('apartment', 'categories', 'services'));
     }
     /**
      * Update the specified resource in storage.
@@ -75,10 +79,14 @@ class ApartmentController extends Controller
     public function update(Request $request, Apartment $apartment)
     {
         $data = $request;
-        $data['user_id'] = Auth::id();
-        $apartment->update($data());
+        $data['is_visible'] = isset($data['is_visible']);
+        $apartment->update($data->all());
+        if (!isset($data['services'])){
+            $data['services'] = [];
+        }
+        $apartment->services()->sync($data['services']);
 
-        return redirect()->route('apartments.edit', $apartment);
+        return redirect()->route('apartments.show', $apartment);
     }
 
     /**

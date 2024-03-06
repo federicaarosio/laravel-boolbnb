@@ -74,6 +74,19 @@
             <input type="text" class="form-control" name="address" id="address" value="{{ old('address', $apartment->address) }}">
         </div>
 
+        <div class="mb-3">
+            <label for="" class="d-block">Services</label>
+            @foreach ($services as $service)
+            <div class="form-check-inline">
+                <input class="form-check-input" type="checkbox" name="services[]" value="{{ $service->id }}" id="check-{{ $service->id }}"
+                @checked(in_array( $service->id, old('technologies', $apartment->services->pluck('id')->toArray())))>
+                <label class="form-check-label" for="check-{{ $service->id }}">
+                    {{ $service->name }}
+                </label>
+            </div>
+            @endforeach
+        </div>
+
         
         <button type="submit" class="btn btn-danger">Create</button>
     </form>

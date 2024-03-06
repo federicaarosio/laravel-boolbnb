@@ -5,16 +5,17 @@
     <h1 class="text-center">Apartment modification</h1>
     {{-- Errors alert --}}
     @if ($errors->any())
-      <div class="alert alert-danger">
-          <ul>
-              @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-              @endforeach
-          </ul>
-      </div>
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
     @endif
     <form action="{{ route('apartments.update', $apartment)}}" method="POST">
         @csrf
+        @method('PUT')
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" class="form-control" name="title" id="title" value="{{ old('title', $apartment->title) }}">
@@ -65,6 +66,28 @@
         <div class="mb-3">
             <label for="address" class="form-label">Address</label>
             <input type="text" class="form-control" name="address" id="address" value="{{ old('address', $apartment->address) }}">
+        </div>
+
+        <div class="mb-3">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="is_visible" id="is_visible" @checked(old('is_visible', $apartment->is_visible))>
+                <label class="form-check-label" for="is_visible">
+                    Visible
+                </label>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="d-block">Services</label>
+            @foreach ($services as $service)
+            <div class="form-check-inline">
+                <input class="form-check-input" type="checkbox" name="services[]" value="{{ $service->id }}" id="check-{{ $service->id }}"
+                @checked(in_array( $service->id, old('technologies', $apartment->services->pluck('id')->toArray())))>
+                <label class="form-check-label" for="check-{{ $service->id }}">
+                    {{ $service->name }}
+                </label>
+            </div>
+            @endforeach
         </div>
 
         <button type="submit" class="btn btn-danger">Edit</button>
