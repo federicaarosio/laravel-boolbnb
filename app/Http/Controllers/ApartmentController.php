@@ -64,17 +64,21 @@ class ApartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Apartment $apartment)
     {
-        //
+        $categories = Category::all();
+        return view('apartments.edit', compact('apartment', 'categories'));
     }
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Apartment $apartment)
     {
-        //
+        $data = $request;
+        $data['user_id'] = Auth::id();
+        $apartment->update($data());
+
+        return redirect()->route('apartments.edit', $apartment);
     }
 
     /**
