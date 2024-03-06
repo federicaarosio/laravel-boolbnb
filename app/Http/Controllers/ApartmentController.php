@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Apartment;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {
@@ -21,7 +23,9 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+        $apartment = new Apartment();
+        $categories = Category::all();
+        return view('apartments.create', compact('apartment', 'categories'));
     }
 
     /**
@@ -29,7 +33,11 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request;
+        $data['user_id'] = Auth::id();
+        $apartment = Apartment::create($data);
+
+        return to_route('apartments.create', $apartment);
     }
 
     /**
