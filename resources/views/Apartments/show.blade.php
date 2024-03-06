@@ -15,7 +15,7 @@
                     <img src="{{ $apartment->img_url }}" class="img-fluid" alt="">
 
                     <p class="mt-3">
-                       <strong>Indirizzo:</strong>  {{ $apartment->address }}
+                        <strong>Indirizzo:</strong>  {{ $apartment->address }}
                     </p>
                     <p>
                         {{ $apartment->description }}
@@ -27,7 +27,7 @@
                         <strong>Numero di letti:</strong> {{ $apartment->bed_number }}
                     </p>
                     <p>
-                        <strong>Numero di quadrati:</strong> {{ $apartment->square_meters }}
+                        <strong>Numero di quadrati(Donato):</strong> {{ $apartment->square_meters }}
                     </p>
 
 

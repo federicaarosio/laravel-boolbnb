@@ -79,7 +79,7 @@
             @foreach ($services as $service)
             <div class="form-check-inline">
                 <input class="form-check-input" type="checkbox" name="services[]" value="{{ $service->id }}" id="check-{{ $service->id }}"
-                @checked(in_array( $service->id, old('technologies', $apartment->services->pluck('id')->toArray())))>
+                @checked(in_array( $service->id, old('services', $apartment->services->pluck('id')->toArray())))>
                 <label class="form-check-label" for="check-{{ $service->id }}">
                     {{ $service->name }}
                 </label>

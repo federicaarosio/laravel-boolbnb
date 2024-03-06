@@ -10,6 +10,23 @@ use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {
+    private $rules = [
+        'user_id' => ['exists:users,id'],
+        'category_id' => ['exists:categories,id'],
+        'title' => ['required', 'string', 'max:80'],
+        'description' => ['required', 'string'],
+        'room_number' => ['required', 'numeric', 'min:1'],
+        'bed_number' => ['required', 'numeric', 'min:1'],
+        'toilet_number' => ['required', 'numeric', 'min:1'],
+        'square_meters' => ['required', 'numeric', 'min:1'],
+        'img_url' => ['required', 'string', 'url:http,https'],
+        'is_visible' => [],
+        'address' => ['required'],
+        'longitude' => ['decimal:6'],
+        'latitude' => ['decimal:6'],
+        'services' => ['array'],
+    ];
+
     /**
      * Display a listing of the resource.
      */
@@ -35,7 +52,7 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request;
+        $data = $request->validate($this->rules);
         $data['user_id'] = Auth::id();
         $data['is_visible'] = true;
 
@@ -51,7 +68,7 @@ class ApartmentController extends Controller
 
         $data['latitude'] = $lat;
         $data['longitude'] = $lon;
-        $apartment = Apartment::create($data->all());
+        $apartment = Apartment::create($data);
         $apartment->services()->sync($data['services']);
         return to_route('apartments.show', $apartment);
     }
@@ -78,9 +95,9 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
-        $data = $request;
+        $data = $request->validate($this->rules);
         $data['is_visible'] = isset($data['is_visible']);
-        $apartment->update($data->all());
+        $apartment->update($data);
         if (!isset($data['services'])){
             $data['services'] = [];
         }
