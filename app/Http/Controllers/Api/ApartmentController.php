@@ -26,13 +26,13 @@ class ApartmentController extends Controller
             $apartments = Apartment::where('room_number', $request['rooms'])->with('user')->get();
         }
 
-        $ids = [1,2,3];
+      //  $ids = [1,2,3];
 
-        $apartments = Apartment::whereHas('services', function ($query) use ($ids) {
-            $query->whereIn('service_id', $ids);
-        })->with('services')->get();
+//$apartments = Apartment::whereHas('services', function ($query) use ($ids) {
+          //  $query->whereIn('service_id', $ids);
+      //  })->with('services')->get();
 
-        dd($apartments);
+       // dd($apartments);
 
 
         return response()->json([
