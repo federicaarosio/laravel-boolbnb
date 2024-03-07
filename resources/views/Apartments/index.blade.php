@@ -6,8 +6,12 @@
 
 <div class="container">
     <div class="row">
+        <div class="col-12 text-center ">
+            <h1 class='py-4'>These are all your apartments, {{ Auth::user()->name }}</h1>        </div>
+        <div class="col-12 my-3 text-end">
+            <a class="btn btn-primary" href="{{ route('apartments.create') }}">Create Apartment</a>
+        </div>
         <div class="col-12">
-                <h1 class='py-4'>These are all your apartments, {{ Auth::user()->name }}</h1>
                 <table class="table table-hover">
                     <thead>
                         <tr>

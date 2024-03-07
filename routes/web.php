@@ -19,8 +19,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::resource('/apartments', ApartmentController::class);
 Auth::routes();
 
-// Route::middleware('auth')->group(function () {
-// });
+Route::middleware('auth')->group(function () {
+    Route::resource('/apartments', ApartmentController::class);
+});
