@@ -11,9 +11,30 @@ class ApartmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $apartments = Apartment::with('user')->get();
+        if($request['rooms'] == 0 && $request['beds'] == 0) {
+            $apartments = Apartment::with('user')->get();
+        } elseif($request->has('beds') && $request['beds'] != 0 && $request->has('rooms') && $request['rooms'] != 0) {
+            $apartments = Apartment::with('user')
+            ->where('bed_number', $request['beds'])
+            ->where('room_number', $request['rooms'])
+            ->get();
+        } elseif($request->has('beds') && $request['beds'] != 0) {
+            $apartments = Apartment::where('bed_number', $request['beds'])->with('user')->get();
+        } else {
+            $apartments = Apartment::where('room_number', $request['rooms'])->with('user')->get();
+        }
+
+        $ids = [1,2,3];
+
+        $apartments = Apartment::whereHas('services', function ($query) use ($ids) {
+            $query->whereIn('service_id', $ids);
+        })->with('services')->get();
+
+        dd($apartments);
+
+
         return response()->json([
             'success' => true,
             'results' => $apartments

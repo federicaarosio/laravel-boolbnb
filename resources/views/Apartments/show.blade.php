@@ -18,7 +18,7 @@
                         <strong>Indirizzo:</strong>  {{ $apartment->address }}
                     </p>
                     <p>
-                        {{ $apartment->description }}
+                        <strong>Descrizione:</strong> {{ $apartment->description }}
                     </p>
                     <p>
                         <strong>Numero di stanze:</strong> {{ $apartment->room_number }}
@@ -27,7 +27,7 @@
                         <strong>Numero di letti:</strong> {{ $apartment->bed_number }}
                     </p>
                     <p>
-                        <strong>Numero di quadrati(Donato):</strong> {{ $apartment->square_meters }}
+                        <strong>Numero di metri quadrati:</strong> {{ $apartment->square_meters }}
                     </p>
 
 
