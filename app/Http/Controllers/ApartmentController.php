@@ -104,6 +104,22 @@ class ApartmentController extends Controller
     {
         $data = $request->validate($this->rules);
         $data['is_visible'] = isset($data['is_visible']);
+
+        if($data['address'] != $apartment->address) {
+            $apiKey = env('TOMTOM_API_KEY');
+            $addressQuery = str_replace(' ', '+', $data['address']);
+
+            $coordinate = "https://api.tomtom.com/search/2/geocode/{$addressQuery}.json?key={$apiKey}";
+
+            $json = file_get_contents($coordinate);
+            $obj = json_decode($json);
+            $lat = $obj->results[0]->position->lat;
+            $lon = $obj->results[0]->position->lon;
+
+            $data['latitude'] = $lat;
+            $data['longitude'] = $lon;
+        }
+
         $apartment->update($data);
         if (!isset($data['services'])){
             $data['services'] = [];
