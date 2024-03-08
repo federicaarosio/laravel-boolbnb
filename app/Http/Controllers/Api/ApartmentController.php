@@ -13,27 +13,24 @@ class ApartmentController extends Controller
      */
     public function index(Request $request)
     {
-        if($request['rooms'] == 0 && $request['beds'] == 0) {
-            $apartments = Apartment::with('user')->get();
-        } elseif($request->has('beds') && $request['beds'] != 0 && $request->has('rooms') && $request['rooms'] != 0) {
-            $apartments = Apartment::with('user')
-            ->where('bed_number', $request['beds'])
-            ->where('room_number', $request['rooms'])
-            ->get();
-        } elseif($request->has('beds') && $request['beds'] != 0) {
-            $apartments = Apartment::where('bed_number', $request['beds'])->with('user')->get();
-        } else {
-            $apartments = Apartment::where('room_number', $request['rooms'])->with('user')->get();
+        $query = Apartment::query();
+
+        if($request->has('beds') && $request['beds'] != 0) {
+            $query->where('bed_number', $request['beds']);
         }
 
-      //  $ids = [1,2,3];
+        if($request->has('rooms') && $request['rooms'] != 0) {
+            $query->where('room_number', $request['rooms']);
+        }
 
-//$apartments = Apartment::whereHas('services', function ($query) use ($ids) {
-          //  $query->whereIn('service_id', $ids);
-      //  })->with('services')->get();
+        if($request->has('services') && $request['services'] != []) {
+            $services = $request['services'];
+            $query->whereHas('services', function ($q) use ($services) {
+                $q->whereIn('service_id', $services);
+            });
+        }
 
-       // dd($apartments);
-
+        $apartments = $query->with('user')->get();
 
         return response()->json([
             'success' => true,
