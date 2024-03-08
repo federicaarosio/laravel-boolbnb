@@ -27,7 +27,8 @@
 
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <input type="text" class="form-control" name="description" id="description" value="{{ old('description', $apartment->description) }}">
+            {{-- <input type="text" class="form-control" name="description" id="description" value="{{ old('description', $apartment->description) }}"> --}}
+            <textarea class="form-control" id="description" name="description" rows="3">{{ old('description', $apartment->description) }}</textarea>
         </div>
         
         <div class="mb-3">

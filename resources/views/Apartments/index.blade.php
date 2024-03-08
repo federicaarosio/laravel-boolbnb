@@ -7,7 +7,16 @@
 <div class="container">
     <div class="row">
         <div class="col-12 text-center ">
-            <h1 class='py-4'>These are all your apartments, {{ Auth::user()->name }}</h1>        </div>
+            <h1 class='py-4'>These are all your apartments, {{ Auth::user()->name }}</h1>
+        </div>
+        <div class="col-12">
+            @if(session('message'))
+                <div class="alert alert-success d-flex justify-content-between" role="alert" id="alert">
+                    {{ session('message') }}
+                    <button type="button" class="btn-close" id="close"></button>
+                </div>
+            @endif
+        </div>
         <div class="col-12 my-3 text-end">
             <a class="btn btn-primary" href="{{ route('apartments.create') }}">Create Apartment</a>
         </div>
@@ -74,6 +83,12 @@
         </div>
     </div>
 
-
-    
+    {{-- Script JS --}}
+    <script>
+        let closebutton = document.getElementById('close');
+        let alertElement = document.getElementById('alert');
+        closebutton.addEventListener('click', () => {
+            alertElement.classList.add('d-none');
+        });
+    </script>
 @endsection

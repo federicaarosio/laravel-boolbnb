@@ -78,7 +78,11 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        return view('apartments.show', compact('apartment'));
+        if($apartment->user_id != Auth::id()) {
+            return to_route('apartments.index')->with('message', 'Non sei Autorizzato! cretino');
+        } else {
+            return view('apartments.show', compact('apartment'));
+        }
     }
 
     /**
@@ -86,6 +90,9 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
+        if($apartment->user_id != Auth::id()) {
+            return to_route('apartments.index')->with('message', 'Non sei Autorizzato! cretino');
+        }
         $categories = Category::all();
         $services = Service::all();
         return view('apartments.edit', compact('apartment', 'categories', 'services'));
