@@ -65,7 +65,7 @@ class ApartmentController extends Controller
      */
     public function show(string $id)
     {
-        $apartments = Apartment::with('category', 'services')->findOrFail($id);
+        $apartments = Apartment::with('category', 'services', 'user')->findOrFail($id);
         return response()->json([
             'success' => true,
             'results' => $apartments
