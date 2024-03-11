@@ -1,18 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'All Apartments')
+@section('title', 'Dettagli Appartamento')
 
 @section('main-content')
     <div class="container">
         <div class="row">
             <div class="col-12">
-
                 <div class="col-md-12 pt-3">
                     <h1 class="font-weight-bold">
                         {{ $apartment->title }}
                     </h1>
 
-                    {{-- <img src="{{ $apartment->img_url }}" class="img-fluid"> --}}
                     @if ( str_starts_with($apartment->img_url, 'http'))
                         <img src="{{ $apartment->img_url }}">
                     @else
@@ -20,7 +18,7 @@
                     @endif
 
                     <p class="mt-3">
-                        <strong>Indirizzo:</strong>  {{ $apartment->address }}
+                        <strong>Indirizzo:</strong> {{ $apartment->address }}
                     </p>
                     <p>
                         <strong>Descrizione:</strong> {{ $apartment->description }}
@@ -34,7 +32,6 @@
                     <p>
                         <strong>Numero di metri quadrati:</strong> {{ $apartment->square_meters }}
                     </p>
-
 
                     <h3 class="mt-3">Cosa troverai:</h3>
                     <div class=" d-flex flex-wrap">
@@ -60,15 +57,7 @@
                                 </div>
                             </div>
                         @endforeach
-
                     </div>
-
-                    <!-- Ora puoi includere direttamente la stringa SVG nella tua vista Blade -->
-
-
-
-
-
                 </div>
             </div>
         </div>

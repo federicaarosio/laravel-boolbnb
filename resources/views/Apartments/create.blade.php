@@ -1,11 +1,11 @@
 @extends('Apartments.layouts.create-or-edit')
 
-@section('title', 'Create Apartment')
+@section('title', 'Aggiungi Appartamento')
 
-@section('heading', 'Add Apartment')
+@section('heading', 'Aggiungi Appartamento')
 
 @section('action')
     {{ route('apartments.store')}}
 @endsection
 
-@section('button-text', 'Create')
+@section('button-text', 'Crea')

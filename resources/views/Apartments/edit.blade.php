@@ -1,8 +1,8 @@
 @extends('Apartments.layouts.create-or-edit')
 
-@section('title', 'Edit Apartment')
+@section('title', 'Modifica Appartamento')
 
-@section('heading', 'Edit Apartment')
+@section('heading', 'Modifica Appartamento')
 
 @section('action')
     {{ route('apartments.update', $apartment)}}
@@ -12,4 +12,4 @@
     @method('PUT')
 @endsection
 
-@section('button-text', 'Edit')
+@section('button-text', 'Modifica')

@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'All Apartments')
+@section('title', 'Appartamenti')
 
 @section('main-content')
 
 <div class="container">
     <div class="row">
         <div class="col-12 text-center ">
-            <h1 class='py-4'>These are all your apartments, {{ Auth::user()->name }}</h1>
+            <h1 class='py-4'>Questi sono tutti i tuoi appartamenti, {{ Auth::user()->name }}</h1>
         </div>
         <div class="col-12">
             @if(session('message'))
@@ -18,16 +18,16 @@
             @endif
         </div>
         <div class="col-12 my-3 text-end">
-            <a class="btn btn-primary" href="{{ route('apartments.create') }}">Create Apartment</a>
+            <a class="btn btn-primary" href="{{ route('apartments.create') }}">Crea un Appartamento</a>
         </div>
         <div class="col-12">
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Title</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col">Nome Appartamento</th>
+                            <th scope="col">Indirizzo</th>
+                            <th scope="col">Categoria</th>
+                            <th scope="col">Opzioni</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,15 +38,15 @@
                             <td>{{ $apartment -> category -> name}}</td>
                             <td>
                                 <a class="btn btn-sm btn-primary" href="{{ route('apartments.show', $apartment) }}">
-                                    View
+                                    Dettagli
                                 </a>
                                 <a class="btn btn-sm btn-success" href="{{ route('apartments.edit', $apartment) }}">
-                                    Edit
+                                    Modifica
                                 </a>
 
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ $apartment->id }}">
-                                    Delete
+                                    Cancella
                                 </button>
                                 
                                 <!-- Modal -->
@@ -54,20 +54,20 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                            <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel">Delete apartment</h1>
+                                            <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel">Cancella Appartamento</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Are you really sure you want to delete "<strong>{{ $apartment->title }}</strong>" apartment?<br>
-                                                After deleting, you'll not be able to restore it.
+                                                Sei sicuro di voler eliminare l'appartamento "<strong>{{ $apartment->title }}</strong>" ?<br>
+                                                Dopo la cancellazione, non sarai piu' in grado di ripristinarlo.
                                             </div>
                                             <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
                                             <form class="d-inline-block" action="{{ route('apartments.destroy', $apartment) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger" type="submit">
-                                                    Delete
+                                                    Cancella
                                                 </button>
                                             </form>
                                             </div>
