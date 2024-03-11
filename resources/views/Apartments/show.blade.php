@@ -12,7 +12,12 @@
                         {{ $apartment->title }}
                     </h1>
 
-                    <img src="{{ $apartment->img_url }}" class="img-fluid" alt="">
+                    {{-- <img src="{{ $apartment->img_url }}" class="img-fluid"> --}}
+                    @if ( str_starts_with($apartment->img_url, 'http'))
+                        <img src="{{ $apartment->img_url }}">
+                    @else
+                        <img src="{{ asset('storage') . '/' . $apartment->img_url }}">
+                    @endif
 
                     <p class="mt-3">
                         <strong>Indirizzo:</strong>  {{ $apartment->address }}

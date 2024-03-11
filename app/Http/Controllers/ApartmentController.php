@@ -2,31 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEditApartmentRequest;
 use App\Models\Apartment;
 use App\Models\Category;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
-    private $rules = [
-        'user_id' => ['exists:users,id'],
-        'category_id' => ['exists:categories,id'],
-        'title' => ['required', 'string', 'max:80'],
-        'description' => ['required', 'string'],
-        'room_number' => ['required', 'numeric', 'min:1'],
-        'bed_number' => ['required', 'numeric', 'min:1'],
-        'toilet_number' => ['required', 'numeric', 'min:1'],
-        'square_meters' => ['required', 'numeric', 'min:1'],
-        'img_url' => ['required', 'string', 'url:http,https'],
-        'is_visible' => [],
-        'address' => ['required'],
-        'longitude' => ['decimal:6'],
-        'latitude' => ['decimal:6'],
-        'services' => ['array'],
-    ];
-
     /**
      * Display a listing of the resource.
      */
@@ -50,11 +35,16 @@ class ApartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEditApartmentRequest $request)
     {
-        $data = $request->validate($this->rules);
+        $data = $request->validated();
         $data['user_id'] = Auth::id();
-        $data['is_visible'] = true;
+        $data['is_visible'] = isset($data['is_visible']);
+
+        if($data['imageOrUrl'] == 'file') {
+            $imageSrc = Storage::put('uploads/Apartments', $data['img_url']);
+            $data['img_url'] = $imageSrc;
+        }
 
         $apiKey = env('TOMTOM_API_KEY');
         $addressQuery = str_replace(' ', '+', $data['address']);
@@ -100,10 +90,15 @@ class ApartmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Apartment $apartment)
+    public function update(StoreEditApartmentRequest $request, Apartment $apartment)
     {
-        $data = $request->validate($this->rules);
+        $data = $request->validated();
         $data['is_visible'] = isset($data['is_visible']);
+
+        if($data['imageOrUrl'] == 'file') {
+            $imageSrc = Storage::put('uploads/Apartments', $data['img_url']);
+            $data['img_url'] = $imageSrc;
+        }
 
         if($data['address'] != $apartment->address) {
             $apiKey = env('TOMTOM_API_KEY');
