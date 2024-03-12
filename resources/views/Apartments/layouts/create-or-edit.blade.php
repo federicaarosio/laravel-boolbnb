@@ -93,7 +93,7 @@
 
             <div class="mb-3">
                 <label for="img_url" class="form-label">Immagine Appartamento*</label>
-                <input type="file" class="form-control @error('img_url') is-invalid @enderror" name="img_url" id="img_url" value="{{ old('img_url', $apartment->img_url) }}">
+                <input type="file" class="form-control @error('img_url') is-invalid @enderror" name="img_url" id="img_url" value="{{ str_starts_with(old('img_url', $apartment->img_url), 'http') ? old('img_url', $apartment->img_url) : '' }}">
                 @error('img_url')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -132,7 +132,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="" class="d-block">Servizi</label>
+                <label for="" class="d-block @error('address') is-invalid @enderror">Servizi*</label>
                 @foreach ($services as $service)
                 <div class="form-check-inline">
                     <input class="form-check-input" type="checkbox" name="services[]" value="{{ $service->id }}" id="check-{{ $service->id }}"
@@ -142,6 +142,11 @@
                     </label>
                 </div>
                 @endforeach
+                @error('services')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
 
             <button type="submit" class="btn btn-danger">@yield('button-text')</button>
