@@ -37,7 +37,7 @@ class StoreEditApartmentRequest extends FormRequest
             'address' => ['required'],
             'longitude' => ['decimal:6'],
             'latitude' => ['decimal:6'],
-            'services' => ['array'],
+            'services' => ['required', 'array'],
         ];
     }
 }
