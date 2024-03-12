@@ -6,3 +6,8 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+#error {
+    width: 100vw;
+    height: calc(100vh - 102px);
+}
