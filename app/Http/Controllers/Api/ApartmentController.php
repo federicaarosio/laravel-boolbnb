@@ -27,17 +27,8 @@ class ApartmentController extends Controller
             $services = $request['services'];
             $query->whereHas('services', function ($q) use ($services) {
                 $q->whereIn('service_id', $services);
-            });
+            }, '=', count($services));
         }
-
-        // if($request->has('services') && $request['services'] != []) {
-        //     $services = $request['services'];
-        //     $query->whereHas('services', function ($q) use ($services) {
-        //         foreach ($services as $service) {
-        //             $q->where('service_id', $service);
-        //         }
-        //     });
-        // }
 
         if($request->has('address') && $request['address'] != "") {
             $apiKey = env('TOMTOM_API_KEY');
@@ -53,7 +44,7 @@ class ApartmentController extends Controller
             $query->whereRaw('ST_Distance( POINT(apartments.longitude, apartments.latitude),POINT(' . $lon . ',' . $lat . ')) < ' . $request['range'] / 100);
         }
 
-        $apartments = $query->with('user')->get();
+        $apartments = $query->with('user', 'services')->get();
 
         return response()->json([
             'success' => true,
