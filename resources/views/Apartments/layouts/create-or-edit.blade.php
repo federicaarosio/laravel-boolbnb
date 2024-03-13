@@ -61,9 +61,9 @@
                 <ul id="results" class="d-none overflow-hidden list-unstyled position-absolute w-50"></ul>
             </div>
 
-            <div class="mb-3">
+            <div id="room_number_wrapper" class="mb-3">
                 <label for="room_number" class="form-label">Numero Stanze*</label>
-                <input type="number" class="form-control @error('room_number') is-invalid @enderror" name="room_number" id="room_number" value="{{ old('room_number', $apartment->room_number) }}">
+                <input type="number" class="form-control @error('room_number') is-invalid @enderror numberValidation" name="room_number" id="room_number" value="{{ old('room_number', $apartment->room_number) }}">
                 @error('room_number')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -73,7 +73,7 @@
 
             <div class="mb-3">
                 <label for="bed_number" class="form-label">Numero Letti*</label>
-                <input type="number" class="form-control @error('bed_number') is-invalid @enderror" name="bed_number" id="bed_number" value="{{ old('bed_number', $apartment->bed_number) }}">
+                <input type="number" class="form-control @error('bed_number') is-invalid @enderror numberValidation" name="bed_number" id="bed_number" value="{{ old('bed_number', $apartment->bed_number) }}">
                 @error('bed_number')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -83,7 +83,7 @@
 
             <div class="mb-3">
                 <label for="toilet_number" class="form-label">Numero Bagni*</label>
-                <input type="number" class="form-control @error('toilet_number') is-invalid @enderror" name="toilet_number" id="toilet_number" value="{{ old('toilet_number', $apartment->toilet_number) }}">
+                <input type="number" class="form-control @error('toilet_number') is-invalid @enderror numberValidation" name="toilet_number" id="toilet_number" value="{{ old('toilet_number', $apartment->toilet_number) }}">
                 @error('toilet_number')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -93,7 +93,7 @@
 
             <div class="mb-3">
                 <label for="square_meters" class="form-label">Metri Quadri Totali*</label>
-                <input type="number" class="form-control @error('square_meters') is-invalid @enderror" name="square_meters" id="square_meters" value="{{ old('square_meters', $apartment->square_meters) }}">
+                <input type="number" class="form-control @error('square_meters') is-invalid @enderror numberValidation" name="square_meters" id="square_meters" value="{{ old('square_meters', $apartment->square_meters) }}">
                 @error('square_meters')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -156,6 +156,7 @@
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/services/services-web.min.js"></script>
 
     <script>
+        // Image Input Switch
         let fileRadio = document.getElementById('fileRadio');
         let urlRadio = document.getElementById('urlRadio');
         let input = document.getElementById('img_url');
@@ -176,6 +177,7 @@
             }
         });
 
+        // Autocomplete
         const queryInput = document.getElementById('address');
         const resultsContainer = document.getElementById('results');
 
@@ -205,6 +207,23 @@
                     resultsContainer.classList.remove('d-none');
                 });
             }
+        });
+
+        // Validation stilosa
+        const inputList = document.getElementsByClassName('numberValidation');
+        const inputArray = Array.from(inputList);
+        inputArray.forEach(element => {
+            element.addEventListener('change', () => {
+                if(element.value <= 0 && element.value != '') {
+                    element.classList.add('is-invalid');
+                    let errorEl = document.createElement('span');
+                    errorEl.classList.add('invalid-feedback')
+                    errorEl.textContent = 'Inserire un numero positivo!'
+                    element.insertAdjacentElement('afterend', errorEl)
+                } else if(element.value == '') {
+                    element.classList.remove('is-invalid');
+                }
+            });
         });
     </script>
 @endsection
