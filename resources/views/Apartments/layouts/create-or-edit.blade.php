@@ -23,7 +23,6 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione*</label>
-                {{-- <input type="text" class="form-control" name="description" id="description" value="{{ old('description', $apartment->description) }}"> --}}
                 <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3">{{ old('description', $apartment->description) }}</textarea>
                 @error('description')
                     <span class="invalid-feedback" role="alert">
@@ -49,6 +48,17 @@
                         </span>
                     @enderror
                 </div>
+            </div>
+
+            <div class="mb-3 position-relative">
+                <label for="address" class="form-label">Indirizzo*</label>
+                <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" id="address" value="{{ old('address', $apartment->address) }}">
+                @error('address')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                <ul id="results" class="d-none overflow-hidden list-unstyled position-absolute w-50"></ul>
             </div>
 
             <div class="mb-3">
@@ -113,16 +123,6 @@
             </div>
 
             <div class="mb-3">
-                <label for="address" class="form-label">Indirizzo*</label>
-                <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" id="address" value="{{ old('address', $apartment->address) }}">
-                @error('address')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-
-            <div class="mb-3">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="is_visible" id="is_visible" @checked(old('is_visible', $apartment->is_visible)) checked>
                     <label class="form-check-label" for="is_visible">
@@ -153,6 +153,8 @@
         </form>
     </section>
 
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/services/services-web.min.js"></script>
+
     <script>
         let fileRadio = document.getElementById('fileRadio');
         let urlRadio = document.getElementById('urlRadio');
@@ -171,6 +173,37 @@
                 input.setAttribute('type', 'text');
             } else {
                 input.setAttribute('type', 'file');
+            }
+        });
+
+        const queryInput = document.getElementById('address');
+        const resultsContainer = document.getElementById('results');
+
+        queryInput.addEventListener('input', () => {
+            resultsContainer.innerHTML = '';
+            let queryValue = queryInput.value;
+            queryValue.length <= 3 ? resultsContainer.classList.add('d-none') : '';
+            if(queryValue.length > 3) {
+                tt.services.fuzzySearch({
+                key: "oKRqWPOdJQ9nZ4klEXeWzl7zVfRWCQhW",
+                query: queryValue,
+                limit: 5,
+                countrySet: 'IT',
+                language: 'it-IT',
+                }).then((response) => {
+                    console.log(response);
+                    let results = response.results;
+                    results.forEach( result => {
+                        let li = document.createElement('li');
+                        li.textContent = result.address.freeformAddress;
+                        li.addEventListener('click', () => {
+                            queryInput.value = result.address.freeformAddress;
+                            resultsContainer.classList.add('d-none');
+                        })
+                        resultsContainer.append(li);
+                    });
+                    resultsContainer.classList.remove('d-none');
+                });
             }
         });
     </script>
