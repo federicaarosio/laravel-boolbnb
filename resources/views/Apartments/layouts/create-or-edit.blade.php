@@ -187,7 +187,7 @@
             queryValue.length <= 3 ? resultsContainer.classList.add('d-none') : '';
             if(queryValue.length > 3) {
                 tt.services.fuzzySearch({
-                key: "oKRqWPOdJQ9nZ4klEXeWzl7zVfRWCQhW",
+                key: "{{ env('TOMTOM_API_KEY') }}",
                 query: queryValue,
                 limit: 5,
                 countrySet: 'IT',
