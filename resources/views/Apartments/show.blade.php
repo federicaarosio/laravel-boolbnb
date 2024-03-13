@@ -37,7 +37,6 @@
                     <div class=" d-flex flex-wrap">
                         @foreach ($apartment->services as $service)
                             @php
-
                                 // Crea un nuovo oggetto DOM con la stringa SVG come contenuto
                                 $dom = new DOMDocument();
                                 $dom->loadXML($service->image);
@@ -49,7 +48,6 @@
                                 $svg = $dom->saveXML($svgElement);
                             @endphp
 
-
                             <div class="col-md-3 mb-3">
                                 <div class="w-50 h-50 p-1 ">
                                     {!! $svg !!}
@@ -58,6 +56,14 @@
                             </div>
                         @endforeach
                     </div>
+                    <ul>
+                        @foreach ($apartment->messages as $message)
+                            <li class="bg-danger">
+                                <p class="m-0">messaggio da:{{ $message->name }}</p>
+                                <p>{{ $message->content }}</p>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>
