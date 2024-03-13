@@ -43,7 +43,8 @@ class ApartmentController extends Controller
 
         if($data['imageOrUrl'] == 'file') {
             $imageSrc = Storage::put('uploads/Apartments', $data['img_url']);
-            $data['img_url'] = $imageSrc;
+            $imageUrl = Storage::url($imageSrc);
+            $data['img_url'] = $imageUrl;
         }
 
         $apiKey = env('TOMTOM_API_KEY');
@@ -68,6 +69,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+        // $apartment['img_url'] = Storage::url($apartment['img_url']);
         if($apartment->user_id != Auth::id()) {
             return to_route('apartments.index')->with('message', 'Non sei Autorizzato!');
         } else {
