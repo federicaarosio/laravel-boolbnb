@@ -6,6 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>@yield('title', 'BoolBnB')</title>
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+        @yield('head')
     </head>
     <body>
         <header>

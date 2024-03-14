@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApartmentController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,5 +23,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
+    Route::post('payment/process', [PaymentController::class, 'index'])->name('payment.process');
+    Route::get('payment/token', [PaymentController::class, 'token'])->name('payment.token');
+    
+    Route::get('/apartments/sponsors', [ApartmentController::class, 'sponsors']);
     Route::resource('/apartments', ApartmentController::class);
 });

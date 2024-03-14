@@ -15,12 +15,12 @@ class ApartmentSponsorSeeder extends Seeder
      */
     public function run(Faker $faker): void
     {
-        $apartments = Apartment::all();
-        $sponsorsIds = Sponsor::all()->pluck('id');
+        // $apartments = Apartment::all();
+        // $sponsorsIds = Sponsor::all()->pluck('id');
 
-        foreach ($apartments as $apartment) {
-            $apartment->sponsors()->syncWithPivotValues($faker->randomElements( $sponsorsIds, rand(1,3), false ), ['expiry_date' => $faker->dateTime()]);
-        }
+        // foreach ($apartments as $apartment) {
+        //     $apartment->sponsors()->syncWithPivotValues($faker->randomElements( $sponsorsIds, rand(1,3), false ), ['expiry_date' => $faker->dateTime()]);
+        // }
 
     }
 }

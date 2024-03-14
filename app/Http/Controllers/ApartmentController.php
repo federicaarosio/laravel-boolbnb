@@ -6,7 +6,9 @@ use App\Http\Requests\StoreEditApartmentRequest;
 use App\Models\Apartment;
 use App\Models\Category;
 use App\Models\Service;
+use App\Models\Sponsor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Composer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -138,5 +140,15 @@ class ApartmentController extends Controller
     {
         $apartment->delete();
         return to_route('apartments.index');
+    }
+
+    /**
+     * Show the form for sponsor one resource.
+     */
+    public function sponsors()
+    {
+        $apartments = Apartment::where('user_id', Auth::id())->with('messages')->get();
+        $sponsors = Sponsor::all();
+        return view('Apartments.sponsor', compact('apartments', 'sponsors'));
     }
 }
