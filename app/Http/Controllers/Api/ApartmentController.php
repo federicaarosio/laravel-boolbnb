@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ApartmentController extends Controller
 {
@@ -44,7 +45,20 @@ class ApartmentController extends Controller
             $query->whereRaw('ST_Distance( POINT(apartments.longitude, apartments.latitude),POINT(' . $lon . ',' . $lat . ')) < ' . $request['range'] / 100);
         }
 
-        $apartments = $query->with('user', 'services')->get();
+        $apartments = $query->with('user', 'services', 'sponsors')->get()->toArray();
+        
+        $sponsoredApartment = [];
+        
+        foreach ($apartments as $index => $apartment) {
+            if ($apartment['sponsors'] != []) {
+                unset($apartments[$index]);
+                array_push($sponsoredApartment, $apartment);
+            }
+        }
+
+        foreach($sponsoredApartment as $sa) {
+            array_unshift($apartments, $sa);
+        }
 
         return response()->json([
             'success' => true,

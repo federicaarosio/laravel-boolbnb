@@ -24,7 +24,7 @@
                         <select class="form-select" id="sponsor_id">
                             <option>Seleziona una sponsor</option>
                             @foreach ($sponsors as $sponsor)
-                                <option value="{{ $sponsor->id }}"> {{ $sponsor->name }} - {{ substr($sponsor->duration, 0, 2) }} Hours - {{ $sponsor->price }} </option>
+                                <option value="{{ $sponsor->id }}"> {{ $sponsor->name }} - {{ substr($sponsor->duration, 0, 3) }} Hours - {{ $sponsor->price }} </option>
                             @endforeach
                         </select>
                     </div>

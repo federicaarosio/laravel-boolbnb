@@ -37,10 +37,13 @@ class PaymentController extends Controller
                     ->where('expiry_date', '>=', $actualDate)
                     ->get()->last();
 
-                if (asset($sponsorship)) {
-                    $date = $sponsorType->expiry_date;
+                if (isset($sponsorship)) {
+                    $date = $sponsorship->expiry_date;
                 } else {
                     $date = $actualDate;
+                    return response()->json([
+                        'success' => true
+                    ]);
                 }
 
                 $endDate = date("Y-m-d H:i:s", strtotime($date . '+' . $duration[0] . 'hours +' . $duration[1] . 'minutes +' . $duration[2] . 'seconds'));

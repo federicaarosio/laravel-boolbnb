@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
         $newUser->birth_date = $faker->date();
         $newUser->save();
 
-        for($i = 0; $i < 20; $i++) {
+        for($i = 0; $i < 5; $i++) {
             $newUser = new User();
             $newUser->name = $faker->firstName();
             $newUser->surname = $faker->lastName();
