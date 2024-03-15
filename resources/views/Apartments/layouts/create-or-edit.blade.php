@@ -4,6 +4,10 @@
     @yield('title')
 @endsection
 
+@section('head')
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+@endsection
+
 @section('main-content')
     <section class="p-5 container">
         <h1 class="text-center">@yield('heading')</h1>
@@ -177,37 +181,78 @@
             }
         });
 
-        // Autocomplete
+        // // Autocomplete
+        // const queryInput = document.getElementById('address');
+        // const resultsContainer = document.getElementById('results');
+
+        // queryInput.addEventListener('input', () => {
+        //     resultsContainer.innerHTML = '';
+        //     let queryValue = queryInput.value;
+        //     queryValue.length <= 3 ? resultsContainer.classList.add('d-none') : '';
+        //     if(queryValue.length > 3) {
+        //         tt.services.fuzzySearch({
+        //         key: "{{ env('TOMTOM_API_KEY') }}",
+        //         query: queryValue,
+        //         limit: 5,
+        //         countrySet: 'IT',
+        //         language: 'it-IT',
+        //         }).then((response) => {
+        //             console.log(response);
+        //             let results = response.results;
+        //             results.forEach( result => {
+        //                 let li = document.createElement('li');
+        //                 li.textContent = result.address.freeformAddress;
+        //                 li.addEventListener('click', () => {
+        //                     queryInput.value = result.address.freeformAddress;
+        //                     resultsContainer.classList.add('d-none');
+        //                 })
+        //                 resultsContainer.append(li);
+        //             });
+        //             resultsContainer.classList.remove('d-none');
+        //         });
+        //     }
+        // });
+
+        async function file_get_content(uri, callback) {
+            let res = await fetch(uri),
+                ret = await res.text();
+            return callback ? callback(ret) : ret;
+        }
+
         const queryInput = document.getElementById('address');
-        const resultsContainer = document.getElementById('results');
 
         queryInput.addEventListener('input', () => {
+            const resultsContainer = document.getElementById('results');
+
+            apiKey = "{{ env('TOMTOM_API_KEY') }}";
+            addressQuery = queryInput.value.replace(' ', '+')
+
+            let endpoint = `https://api.tomtom.com/search/2/geocode/${addressQuery}.json?key=${apiKey}`
+
+            let results = '';
             resultsContainer.innerHTML = '';
+
             let queryValue = queryInput.value;
             queryValue.length <= 3 ? resultsContainer.classList.add('d-none') : '';
+
             if(queryValue.length > 3) {
-                tt.services.fuzzySearch({
-                key: "{{ env('TOMTOM_API_KEY') }}",
-                query: queryValue,
-                limit: 5,
-                countrySet: 'IT',
-                language: 'it-IT',
-                }).then((response) => {
-                    console.log(response);
-                    let results = response.results;
-                    results.forEach( result => {
+                file_get_content(endpoint).then( response => {
+                    results = JSON.parse(response);
+                    console.log(results);
+                    
+                    for(let i = 0; i < 4; i++) {
                         let li = document.createElement('li');
-                        li.textContent = result.address.freeformAddress;
+                        li.textContent = results.results[i].address.freeformAddress;
                         li.addEventListener('click', () => {
-                            queryInput.value = result.address.freeformAddress;
+                            queryInput.value = results.results[i].address.freeformAddress;
                             resultsContainer.classList.add('d-none');
                         })
                         resultsContainer.append(li);
-                    });
+                    }
                     resultsContainer.classList.remove('d-none');
                 });
             }
-        });
+        })
 
         // Validation stilosa
         const inputList = document.getElementsByClassName('numberValidation');
