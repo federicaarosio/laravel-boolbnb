@@ -12,18 +12,6 @@
     height: calc(100vh - 102px);
 }
 
-// #results {
-//     top: 80px;
-//     padding: 0.75rem 0;
-//     background-color: white;
-//     border-radius: 30px;
-//     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
-//     li {
-//         padding: 0 .75rem;
-//     }
-// }
-
 #results {
     width: 500px;
     top: 70px;
@@ -40,4 +28,9 @@
             background-color: #f7f7f7;
         }
     }
+}
+
+.my-bg-primary {
+    background-color: $primary-color;
+    color: white;
 }
