@@ -56,10 +56,10 @@
                             </div>
                         @endforeach
                     </div>
-                    <ul>
+                    <ul class="list-group mb-5">
                         @foreach ($apartment->messages as $message)
-                            <li class="bg-danger">
-                                <p class="m-0">messaggio da:{{ $message->name }}</p>
+                            <li class="list-group-item">
+                                <p class="m-0">messaggio da: {{ $message->name }}</p>
                                 <p>{{ $message->content }}</p>
                             </li>
                         @endforeach

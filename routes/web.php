@@ -26,6 +26,6 @@ Route::middleware('auth')->group(function () {
     Route::post('payment/process', [PaymentController::class, 'index'])->name('payment.process');
     Route::get('payment/token', [PaymentController::class, 'token'])->name('payment.token');
     
-    Route::get('/apartments/sponsors', [ApartmentController::class, 'sponsors']);
+    Route::get('/apartments/sponsors', [ApartmentController::class, 'sponsors'])->name('apartments.sponsors');
     Route::resource('/apartments', ApartmentController::class);
 });

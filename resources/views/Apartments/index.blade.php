@@ -18,6 +18,7 @@
             @endif
         </div>
         <div class="col-12 my-3 text-end">
+            <a class="btn btn-secondary" href="{{ route('apartments.sponsors') }}">Sponsorizza</a>
             <a class="btn btn-primary" href="{{ route('apartments.create') }}">Crea un Appartamento</a>
         </div>
         <div class="col-12">
