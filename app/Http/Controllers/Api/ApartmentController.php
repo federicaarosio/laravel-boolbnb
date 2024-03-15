@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ApartmentController extends Controller
 {
@@ -17,11 +16,11 @@ class ApartmentController extends Controller
         $query = Apartment::query();
 
         if($request->has('beds') && $request['beds'] != 0) {
-            $query->where('bed_number', $request['beds']);
+            $query->where('bed_number', '>=', $request['beds']);
         }
 
         if($request->has('rooms') && $request['rooms'] != 0) {
-            $query->where('room_number', $request['rooms']);
+            $query->where('room_number', '>=', $request['rooms']);
         }
 
         if($request->has('services') && $request['services'] != []) {
