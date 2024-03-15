@@ -19,7 +19,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::where('user_id', Auth::id())->with('messages')->get();
+        $apartments = Apartment::where('user_id', Auth::id())->with('messages', 'sponsors')->get();
         return view('Apartments.index', compact('apartments'));
     }
 
