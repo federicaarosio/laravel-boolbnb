@@ -41,9 +41,6 @@ class PaymentController extends Controller
                     $date = $sponsorship->expiry_date;
                 } else {
                     $date = $actualDate;
-                    return response()->json([
-                        'success' => true
-                    ]);
                 }
 
                 $endDate = date("Y-m-d H:i:s", strtotime($date . '+' . $duration[0] . 'hours +' . $duration[1] . 'minutes +' . $duration[2] . 'seconds'));

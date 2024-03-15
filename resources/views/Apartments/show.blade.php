@@ -16,7 +16,7 @@
                     @else
                         <img src="{{ asset('storage') . '/' . $apartment->img_url }}">
                     @endif
-                    @if ($apartment->sponsors != '')
+                    @if ($apartment->sponsors->isNotEmpty())
                         <div class="my-2">
                             <span class="badge rounded-pill my-bg-primary me-1 p-2" >Sponsorizzato</span>
                             Fino al {{ $apartment->sponsors[count($apartment->sponsors) - 1]->pivot->expiry_date }}
