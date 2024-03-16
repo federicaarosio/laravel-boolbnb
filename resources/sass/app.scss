@@ -1,11 +1,31 @@
-// Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
-
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+// Font
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
+
+body {
+    font-family: "Noto Sans JP", sans-serif;
+    color: $text-color;
+}
+
+.my-bg-primary {
+    background-color: $primary-color;
+    color: white;
+}
+
+.my-text-primary {
+    color: $primary-color;
+}
+
+.my-alert {
+    background-color: rgba(146, 130, 194, 0.6);
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+}
 
 #error {
     width: 100vw;
@@ -30,7 +50,15 @@
     }
 }
 
-.my-bg-primary {
-    background-color: $primary-color;
-    color: white;
+#sponsors {
+
+    .card {
+        border: 1px solid $primary-color;
+        box-shadow: rgba(159, 145, 204, 1) 0px 3px 8px;
+    }
+
+    .btn:hover {
+        background-color: #9282c2;
+        color: white;
+    }
 }
