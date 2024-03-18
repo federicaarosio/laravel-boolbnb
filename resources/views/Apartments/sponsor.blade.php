@@ -8,9 +8,10 @@
 @endsection
 
 @section('main-content')
+    <img src="{{ asset('img/wave.svg') }}" class="position-absolute w-100 bottom-0 ">
     <div id="sponsors" class="container-fluid">
-        <div class="row justify-content-evenly">
-            <div class="col-4">
+        <div class="row justify-content-evenly flex-column-reverse flex-xxl-row">
+            <div class="col-12 col-xxl-5 d-none d-xxl-block ">
                 <div class="row">
                     <div class="col-12 mb-3">
                         <h1 class="my-text-primary mb-3">Servizio di Sponsorizzazione per Host</h1>
@@ -42,36 +43,35 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-12 col-xxl-4">
                 <div class="card rounded-4">
                     <div class="card-body">
-                        <h1 class="mb-3 my-text-primary fw-medium">Sponsorizza</h1>
-                        <div id="messageHandler">
-
-                        </div>
-                        <div class="mb-3">
-                            <label for="apartment_id" class="form-label">Seleziona l'appartamento da sponsorizzare</label>
-                            <select class="form-select form-select-lg" id="apartment_id">
-                                <option>Seleziona un appartamento</option>
-                                @foreach ($apartments as $apartment)
-                                <option value="{{ $apartment->id }}">{{ $apartment->title }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div>
-                            <label for="sponsor_id" class="form-label ">Seleziona il tipo di sponsor</label>
-                            <select class="form-select form-select-lg" id="sponsor_id">
-                                <option>Seleziona una sponsor</option>
-                                @foreach ($sponsors as $sponsor)
-                                    <option value="{{ $sponsor->id }}"> {{ $sponsor->name }} - {{ substr($sponsor->duration, 0, 3) }} Hours - {{ $sponsor->price }} </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <form id="payment-form">
-                            <input type="hidden" id="nonce" name="payment_method_nonce" />
-                            <div id="dropin-container"></div>
-                            <input class="btn my-bg-primary" type="submit" id="send"></input>
-                        </form>
+                            <h1 class="mb-3 my-text-primary fw-medium">Sponsorizza</h1>
+                            <div id="messageHandler"></div>
+                            <div class="mb-4">
+                                <label for="apartment_id" class="form-label fw-semibold ">Seleziona l'appartamento da sponsorizzare</label>
+                                <select class="form-select form-select-lg p-3" id="apartment_id">
+                                    <option>Seleziona un appartamento</option>
+                                    @foreach ($apartments as $apartment)
+                                    <option value="{{ $apartment->id }}">{{ $apartment->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="">
+                                <label for="sponsor_id" class="form-label fw-semibold ">Seleziona il tipo di sponsor</label>
+                                <select class="form-select form-select-lg p-3" id="sponsor_id">
+                                    <option>Seleziona una sponsor</option>
+                                    @foreach ($sponsors as $sponsor)
+                                        <option value="{{ $sponsor->id }}"> {{ $sponsor->name }} - {{ strlen($sponsor->duration) <= 8 ? substr($sponsor->duration, 0, 2) : substr($sponsor->duration, 0, 3) }} Hours - {{ $sponsor->price }}$ </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <form id="payment-form">
+                                <input type="hidden" id="nonce" name="payment_method_nonce" />
+                                <div id="dropin-container"></div>
+                                <input class="btn my-bg-primary" type="submit" id="send"></input>
+                            </form>
+                    </div>
                     </div>
                 </div>
             </div>

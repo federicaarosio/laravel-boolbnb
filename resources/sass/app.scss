@@ -10,6 +10,7 @@
 body {
     font-family: "Noto Sans JP", sans-serif;
     color: $text-color;
+    overflow-x: hidden;
 }
 
 .my-bg-primary {
@@ -18,7 +19,7 @@ body {
 }
 
 .my-text-primary {
-    color: $primary-color;
+    color: $primary-color !important;
 }
 
 .my-alert {
@@ -64,12 +65,8 @@ body {
     }
 }
 
-.my-bg-primary {
-    background-color: $primary-color;
-    color: white;
-}
 .primary-text{
-    color: $primary-color;
+    color: $primary-color !important;
 }
 .my-btn{
     background-color: $primary-color !important;
@@ -96,4 +93,47 @@ body {
 .datepicker {
     background-color: $primary-color ;
     color: $primary-color ;
+}
+
+#payment-form {
+    max-width: 500px;
+}
+
+.form-select:focus {
+    border-color: $primary-color;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(159, 145, 204, 0.3);
+}
+
+.custom-btn-purple {
+    background-color: $primary-color;
+    color: white;
+    padding: 0.4rem 0.8rem !important;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: rgba(90, 80, 121, 0.8);
+        color: white;
+    }
+}
+
+.my-row {
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    background-color: white;
+}
+
+td {
+    line-height: 60px;
+    height: 60px;
+}
+
+.my-shape {
+    z-index: -1;
+}
+
+table,
+tr,
+td,
+th {
+    background-color: white !important;
 }
