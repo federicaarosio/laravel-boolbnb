@@ -63,3 +63,37 @@ body {
         color: white;
     }
 }
+
+.my-bg-primary {
+    background-color: $primary-color;
+    color: white;
+}
+.primary-text{
+    color: $primary-color;
+}
+.my-btn{
+    background-color: $primary-color !important;
+    color: white;
+}
+
+.my-check {
+
+    &:hover {
+        border-color: $primary-color !important;
+    }
+
+    &:checked {
+        border-color: $primary-color !important;
+        background-color: $primary-color !important;
+    }
+
+    &:focus {
+        border-color: $primary-color !important;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(159, 145, 204, 0.3);
+    }
+}
+.datepicker {
+    background-color: $primary-color ;
+    color: $primary-color ;
+}
