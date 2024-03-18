@@ -3,19 +3,23 @@
 @section('main-content')
 <div class="container mt-4">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Accedi</div>
+        <div class="col-md-6">
+            <div class="card rounded-5 px-5 py-3">
+                {{-- <div class="card-header">Accedi</div> --}}
 
-                <div class="card-body">
+                <div class="card-body ">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
+                        <div class="text-center mb-3">
+                            <img src="{{ asset('img/logoBoolbnb.png') }}" height="70">
+                        </div>
+                        <h2 class="mb-3 text-center p-0 fw-bold primary-text">Bentornato!</h2>
+                        <h5 class="mb-4 text-center p-0">Accedi per continuare</h5>
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">Indirizzo Email*</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        <div class="mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-start fs-5">Email</label>
+                            <div class="col-md-12">
+                                <input id="email" type="email" class="p-3 my-check form-control form-control-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -25,11 +29,11 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">Password*</label>
+                        <div class="mb-3 ">
+                            <label for="password" class="col-md-4 col-form-label text-md-start fs-5">Password</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <div class="col-md-12 ">
+                                <input id="password" type="password" class="p-3 my-check form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -39,31 +43,31 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="form-check ">
+                                        <input class="form-check-input my-check" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="remember">{{ __('Ricordami') }}</label>
+                                    </div>
+                                    @if (Route::has('password.request'))
+                                        <a class="btn fs-6 link-underline link-underline-opacity-0 p-0" href="{{ route('password.request') }}">
+                                            Hai dimenticato la password?
+                                        </a>
+                                    @endif
+                                </div>   
+                                <button type="submit" class="text-white btn mb-3 mt-5 p-3 fs-4 rounded-3 w-100 my-btn">
                                     Accedi
                                 </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        Hai dimenticato la password?
-                                    </a>
-                                @endif
+                                <a class="btn fs-5 link-underline link-underline-opacity-0 p-0" href="{{ route('register') }}">
+                                    <span class="primary-text">Registrati</span> su Boolbnb
+                                </a>
                             </div>
                         </div>
+
+
+  
+
                     </form>
                 </div>
             </div>
