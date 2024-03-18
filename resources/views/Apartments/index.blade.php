@@ -15,7 +15,7 @@
         </div>
         <div class="col-12">
             @if(session('message'))
-                <div class="alert alert-success d-flex justify-content-between" role="alert" id="alert">
+                <div class="alert alert-success d-flex justify-content-between" role="alert" id="alert" onload="closeButton">
                     {{ session('message') }}
                     <button type="button" class="btn-close" id="close"></button>
                 </div>
@@ -92,10 +92,12 @@
 
     {{-- Script JS --}}
     <script>
-        let closebutton = document.getElementById('close');
-        let alertElement = document.getElementById('alert');
-        closebutton.addEventListener('click', () => {
-            alertElement.classList.add('d-none');
-        });
+        function closeButton() {
+            let closebutton = document.getElementById('close');
+            let alertElement = document.getElementById('alert');
+            closebutton.addEventListener('click', () => {
+                alertElement.classList.add('d-none');
+            });
+        }
     </script>
 @endsection
