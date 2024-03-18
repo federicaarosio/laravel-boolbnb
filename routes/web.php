@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApartmentController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,4 +29,5 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/apartments/sponsors', [ApartmentController::class, 'sponsors'])->name('apartments.sponsors');
     Route::resource('/apartments', ApartmentController::class);
+    Route::resource('/messages', MessageController::class);
 });

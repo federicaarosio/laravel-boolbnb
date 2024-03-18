@@ -43,10 +43,10 @@
                             <td class="d-none d-xl-table-cell">{{ $apartment -> category -> name}}</td>
                             <td>
                                 <div class="d-flex justify-content-evenly align-items-center h-100 flex-column flex-md-row">
-                                    <a class="btn btn-sm custom-btn-purple mb-1" href="{{ route('apartments.show', $apartment) }}">
+                                    <a class="btn btn-sm custom-btn-purple mb-1 mb-sm-0" href="{{ route('apartments.show', $apartment) }}">
                                         Dettagli
                                     </a>
-                                    <a class="btn btn-sm custom-btn-purple mb-1" href="{{ route('apartments.edit', $apartment) }}">
+                                    <a class="btn btn-sm custom-btn-purple mb-1 mb-sm-0" href="{{ route('apartments.edit', $apartment) }}">
                                         Modifica
                                     </a>
     

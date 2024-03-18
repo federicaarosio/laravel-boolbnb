@@ -90,6 +90,7 @@ body {
         box-shadow: 0 0 0 0.25rem rgba(159, 145, 204, 0.3);
     }
 }
+
 .datepicker {
     background-color: $primary-color ;
     color: $primary-color ;
@@ -136,4 +137,35 @@ tr,
 td,
 th {
     background-color: white !important;
+}
+
+
+
+#show {
+    margin-top: 5rem;
+
+    .svg {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+    }
+
+    .text {
+        font-size: 10px;
+    }
+
+    .category-img {
+        width: 20px;
+        height: 20px;
+        margin-left: 0.5rem;
+    }
+
+    .card {
+        border: 1px solid $primary-color;
+        box-shadow: rgba(159, 145, 204, 1) 0px 3px 8px;
+    }
+
+}
+.modal-body {
+    line-height: 25px !important;
 }
