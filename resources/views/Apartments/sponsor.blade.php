@@ -8,9 +8,9 @@
 @endsection
 
 @section('main-content')
-    <div id="sponsors" class="container mt-5">
-        <div class="row">
-            <div class="col-8">
+    <div id="sponsors" class="container-fluid">
+        <div class="row justify-content-evenly">
+            <div class="col-4">
                 <div class="row">
                     <div class="col-12 mb-3">
                         <h1 class="my-text-primary mb-3">Servizio di Sponsorizzazione per Host</h1>
@@ -50,8 +50,8 @@
 
                         </div>
                         <div class="mb-3">
-                            <label for="apartment_id" class="form-label">Inserisci l'appartamento da sponsorizzare</label>
-                            <select class="form-select" id="apartment_id">
+                            <label for="apartment_id" class="form-label">Seleziona l'appartamento da sponsorizzare</label>
+                            <select class="form-select form-select-lg" id="apartment_id">
                                 <option>Seleziona un appartamento</option>
                                 @foreach ($apartments as $apartment)
                                 <option value="{{ $apartment->id }}">{{ $apartment->title }}</option>
@@ -59,8 +59,8 @@
                             </select>
                         </div>
                         <div>
-                            <label for="sponsor_id" class="form-label ">Inserisci il tipo di sponsor</label>
-                            <select class="form-select" id="sponsor_id">
+                            <label for="sponsor_id" class="form-label ">Seleziona il tipo di sponsor</label>
+                            <select class="form-select form-select-lg" id="sponsor_id">
                                 <option>Seleziona una sponsor</option>
                                 @foreach ($sponsors as $sponsor)
                                     <option value="{{ $sponsor->id }}"> {{ $sponsor->name }} - {{ substr($sponsor->duration, 0, 3) }} Hours - {{ $sponsor->price }} </option>
