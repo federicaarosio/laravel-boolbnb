@@ -13,7 +13,7 @@
                         <div class="text-center mb-3">
                             <img src="{{ asset('img/logoBoolbnb.png') }}" height="70">
                         </div>
-                        <h2 class="mb-3 text-center p-0 fw-bold primary-text">Bentornato!</h2>
+                        <h2 class="mb-3 text-center p-0 fw-bold my-text-primary">Bentornato!</h2>
                         <h5 class="mb-4 text-center p-0">Accedi per continuare</h5>
 
                         <div class="mb-3">
@@ -60,7 +60,7 @@
                                     Accedi
                                 </button>
                                 <a class="btn fs-5 link-underline link-underline-opacity-0 p-0" href="{{ route('register') }}">
-                                    <span class="primary-text">Registrati</span> su Boolbnb
+                                    <span class="my-text-primary">Registrati</span> su Boolbnb
                                 </a>
                             </div>
                         </div>

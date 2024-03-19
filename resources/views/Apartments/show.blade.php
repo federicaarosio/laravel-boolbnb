@@ -31,10 +31,8 @@
                                 Sponsorizzazione 
                             </p>
                             @if ($apartment->sponsors->isNotEmpty())
-                                {{-- <span class="badge rounded-pill my-bg-primary me-1 p-2">Attiva</span> --}}
                                 <p class="mb-1">Sponsor: <span class="my-text-primary fw-semibold ">Attiva</span></p>
                                 @else
-                                {{-- <span class="badge rounded-pill my-bg-primary me-1 p-2">Non Attiva</span> --}}
                                 <p class="mb-1">Sponsor: <span class="my-text-primary fw-semibold ">Non Attiva</span></p>
                             @endif
                             @if ($apartment->sponsors->isNotEmpty())

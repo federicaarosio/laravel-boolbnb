@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class PaymentController extends Controller
 {
     function index(Request $request) {
-        if($request['nonce'] != null){
+        if($request['nonce'] != null) {
 
             $sponsorType = Sponsor::where('id', $request['sponsor_id'])->first();
             $duration = explode(':', $sponsorType->duration);
@@ -29,7 +29,7 @@ class PaymentController extends Controller
             ]);
 
             if($transaction->success) {
-                
+
                 $actualDate = date("Y-m-d H:i:s");
 
                 $sponsorship = DB::table('apartment_sponsor')
@@ -53,8 +53,6 @@ class PaymentController extends Controller
                     ]
                 );
 
-                // return to_route('apartments.show', compact('apartment'))
-                //     ->with('message', 'Your apartment is sponsored until the date: ' . date('d-m-Y', strtotime($endDate)) . ' at ' . date('H:i', strtotime($endDate)));
                 return response()->json([
                     'success' => true
                 ]);

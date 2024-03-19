@@ -64,6 +64,7 @@ class ApartmentController extends Controller
         $data['longitude'] = $lon;
         $apartment = Apartment::create($data);
         $apartment->services()->sync($data['services']);
+
         return to_route('apartments.show', $apartment);
     }
 
@@ -72,7 +73,6 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        // $apartment['img_url'] = Storage::url($apartment['img_url']);
         if($apartment->user_id != Auth::id()) {
             return to_route('apartments.index')->with('message', 'Non sei Autorizzato!');
         } else {
@@ -86,7 +86,6 @@ class ApartmentController extends Controller
     public function edit(Apartment $apartment)
     {
         if($apartment->user_id != Auth::id()) {
-            // return to_route('apartments.index')->with('message', 'Non sei Autorizzato!');
             return view('pages.error');
         }
         $categories = Category::all();
@@ -100,6 +99,7 @@ class ApartmentController extends Controller
     {
         $data = $request->validated();
         $data['is_visible'] = isset($data['is_visible']);
+
         if($data['imageOrUrl'] == 'file') {
             if(empty($data['img_url'])) {
                 $data['img_url'] = $apartment->img_url;
@@ -129,6 +129,7 @@ class ApartmentController extends Controller
         if (!isset($data['services'])){
             $data['services'] = [];
         }
+        
         $apartment->services()->sync($data['services']);
 
         return redirect()->route('apartments.show', $apartment);

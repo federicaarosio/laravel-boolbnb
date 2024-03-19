@@ -12,7 +12,7 @@
                         <div class="text-center mb-3">
                             <img src="{{ asset('img/logoBoolbnb.png') }}" height="70">
                         </div>
-                        <h2 class="mb-3 text-center p-0 fw-bold primary-text">Registrati!</h2>
+                        <h2 class="mb-3 text-center p-0 fw-bold my-text-primary">Registrati!</h2>
 
                         <div class="mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-start fs-5">Nome</label>
