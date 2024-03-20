@@ -96,7 +96,10 @@
                                 <button type="submit" class="btn text-white btn mb-3 mt-3 p-3 fs-4 rounded-3 w-100 my-btn">
                                     Registrati
                                 </button>
-
+                                <a class="btn fs-5 link-underline link-underline-opacity-0 p-0" href="{{ route('login') }}">
+                                    <span class="my-text-primary">Accedi</span> su Boolbnb
+                                </a>
+                            </div>
                         </div>
                     </form>
                 </div>

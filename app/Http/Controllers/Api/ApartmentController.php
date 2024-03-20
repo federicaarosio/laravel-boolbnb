@@ -44,6 +44,8 @@ class ApartmentController extends Controller
             $query->whereRaw('ST_Distance( POINT(apartments.longitude, apartments.latitude),POINT(' . $lon . ',' . $lat . ')) < ' . $request['range'] / 100);
         }
 
+        $query->where('is_visible', 1);
+
         $apartments = $query->with('user', 'services', 'sponsors')->get()->toArray();
         
         $sponsoredApartment = [];

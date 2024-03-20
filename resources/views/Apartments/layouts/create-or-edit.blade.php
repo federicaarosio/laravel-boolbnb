@@ -10,7 +10,7 @@
 
 @section('main-content')
     <div class="container">
-        <div class="row my-row rounded-5 p-4 mt-4">
+        <div class="row my-row rounded-5 p-4 my-4">
             <div class="col-12 mb-4">
                 <h1 class="my-text-primary fw-medium">@yield('heading')</h1>
             </div>
@@ -119,7 +119,7 @@
                         </div>
                         <div class="col-6 col-md-3">
                             <div class="mb-3">
-                                <label for="square_meters" class="form-label my-text-primary fw-semibold my-text-primary">Metri Quadri Totali*</label>
+                                <label for="square_meters" class="form-label my-text-primary fw-semibold my-text-primary">M<sup>2</sup> Totali*</label>
                                 <input type="number" class="form-control @error('square_meters') is-invalid @enderror numberValidation" name="square_meters" id="square_meters" value="{{ old('square_meters', $apartment->square_meters) }}">
                                 @error('square_meters')
                                     <span class="invalid-feedback" role="alert">
@@ -144,7 +144,7 @@
                             <div class="row">
                                 @foreach ($services as $service)
                                     <div class="col-6 col-md-6 col-lg-4 col-xl-3 mb-2">
-                                        <div class="form-check-inline">
+                                        <div class="form-check">
                                             <input class="form-check-input my-check" type="checkbox" name="services[]" value="{{ $service->id }}" id="check-{{ $service->id }}"
                                             @checked(in_array( $service->id, old('services', $apartment->services->pluck('id')->toArray())))>
                                             <label class="form-check-label" for="check-{{ $service->id }}">
@@ -163,7 +163,7 @@
                         <div class="col-1 pt-md-4">
                             <div class="mb-3 d-flex justify-content-start justify-content-md-end">
                                 <div class="form-check">
-                                    <input class="form-check-input my-check" type="checkbox" name="is_visible" id="is_visible" @checked(old('is_visible', $apartment->is_visible)) checked>
+                                    <input class="form-check-input my-check" type="checkbox" name="is_visible" id="is_visible" @checked(old('is_visible', $apartment->is_visible))>
                                     <label class="form-check-label" for="is_visible">
                                         Visibile
                                     </label>

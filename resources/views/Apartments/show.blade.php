@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-12 mb-2">
                         <h1 class="fs-2 my-text-primary">
-                            {{ $apartment->title }}
+                            {{ $apartment->title }} <span class="fs-6 text-black">({{ $apartment->is_visible ? 'Disponibile' : 'Non Disponibile' }})</span>
                         </h1>
                     </div>
                     <div class="col-12 col-xl-6 mb-2">
@@ -93,7 +93,7 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                        <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel">Cancella Appartamento</h1>
+                                                        <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel">Cancella Messaggio</h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
