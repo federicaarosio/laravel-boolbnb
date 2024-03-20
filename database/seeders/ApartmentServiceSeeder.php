@@ -19,7 +19,7 @@ class ApartmentServiceSeeder extends Seeder
         $servicesIds = Service::all()->pluck('id');
 
         foreach ($apartments as $apartment) {
-            $apartment->services()->sync($faker->randomElements( $servicesIds, rand(1,5), false ));
+            $apartment->services()->sync($faker->randomElements( $servicesIds, rand(3,8), false ));
         }
 
     }
