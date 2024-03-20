@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Apartment;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,8 +15,10 @@ class MessageController extends Controller
     public function index(Request $request)
     {
         $messages = Message::where('apartment_id', $request['apartment_id'])->with('apartment')->get();
-        // dd($messages);
-        if($messages[0]->apartment->user_id != Auth::id()) {
+        if(count($messages) == 0) {
+            $apartment = Apartment::where('id', $request['apartment_id'])->first();
+            return to_route('apartments.show', compact('apartment'));
+        } elseif($messages[0]->apartment->user_id != Auth::id()) {
             return to_route('apartments.index')->with('message', 'Non sei Autorizzato!');
         } else {
             return view('Messages.index', compact('messages'));
