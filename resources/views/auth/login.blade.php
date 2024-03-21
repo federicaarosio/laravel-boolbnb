@@ -3,7 +3,7 @@
 @section('main-content')
 <div class="container mt-4">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-lg-6">
             <div class="card rounded-5 px-5 py-3">
                 {{-- <div class="card-header">Accedi</div> --}}
 
@@ -64,10 +64,6 @@
                                 </a>
                             </div>
                         </div>
-
-
-  
-
                     </form>
                 </div>
             </div>
