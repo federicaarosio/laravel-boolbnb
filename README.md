@@ -1,4 +1,5 @@
 # Boolbnb
+check also the [Front-end Repository](https://github.com/federicaarosio/vue-boolbnb)
 
 ## Overview
 
